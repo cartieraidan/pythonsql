@@ -24,7 +24,7 @@ class optionInsert:
 
         self.bars = []
         self._dataFrame = pd.DataFrame(self.bars) #just a place holder variable
-        self.MAX_LIMIT = 50_000
+        self.OPTION_MAX = 1_000
 
         self.client = RESTClient(api_key=os.getenv("APIKEY"))
 
@@ -63,7 +63,54 @@ class optionInsert:
         
     #******start here now for section 4
     def _optionListCall(self, lst: list) -> None:
-        print('worked') 
+        #print('worked') 
+        #print(lst[0:5])
+        weekNb = 1
+        ticker = ''
+        exp = ''
+        high = 0
+        low = 0
+        start_date = ''
+        for week in lst:
+
+            print(f"week {weekNb}: \n\texpired date of week = {week[0]}\n\thigh of week = {week[1]}\n\tlow of week = {week[2]}")
+            for day in week[3:]:
+                if day != None:
+                    print(f"\tstart of week = {day[0]}")
+                    ticker = day[1]
+                    start_date = day[0]
+                    break
+
+            if weekNb == 7:
+                exp = week[0]
+                high = week[1]
+                low = week[2]
+                break
+            else:
+                weekNb += 1
+
+        print(ticker)
+        bars = [] # add to self.whatever after only for testing
+        #need to adjust low and high to get contracts a little out of the range
+        for bar in self.client.list_options_contracts(
+            underlying_ticker=ticker,
+            contract_type=None,
+            expiration_date=exp,
+            as_of=start_date,
+            strike_price_lte=high,
+            strike_price_gte=low,
+            expired=True,
+            limit=self.OPTION_MAX
+            ):
+            print(bar, "here")
+            print('here')
+            bars.append(bar)
+            if len(bars) == (5*self.OPTION_MAX):
+                print("sleeping for 1 minute")
+                time.sleep(60)
+
+        print(bars)
+
 
     def retrieveData(self, ticker: str) -> None:
 
