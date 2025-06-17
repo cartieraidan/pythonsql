@@ -89,7 +89,7 @@ class optionInsert:
             else:
                 weekNb += 1
 
-        print(ticker)
+        print(ticker, exp, start_date, high, low)
         bars = [] # add to self.whatever after only for testing
         #need to adjust low and high to get contracts a little out of the range
         for bar in self.client.list_options_contracts(
@@ -97,8 +97,8 @@ class optionInsert:
             contract_type=None,
             expiration_date=exp,
             as_of=start_date,
-            strike_price_lte=high,
-            strike_price_gte=low,
+            strike_price_lte=float(high),
+            strike_price_gte=float(low),
             expired=True,
             limit=self.OPTION_MAX
             ):
