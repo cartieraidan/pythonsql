@@ -79,6 +79,7 @@ class optionInsert:
                     print(f"\tstart of week = {day[0]}")
                     ticker = day[1]
                     start_date = day[0]
+                    #print(day[0].isoformat())
                     break
 
             if weekNb == 7:
@@ -89,27 +90,29 @@ class optionInsert:
             else:
                 weekNb += 1
 
-        print(ticker, exp, start_date, high, low)
+        print(ticker, exp.isoformat(), start_date.isoformat(), float(high), float(low))
         bars = [] # add to self.whatever after only for testing
-        #need to adjust low and high to get contracts a little out of the range
+        
         for bar in self.client.list_options_contracts(
             underlying_ticker=ticker,
             contract_type=None,
-            expiration_date=exp,
-            as_of=start_date,
-            strike_price_lte=float(high),
-            strike_price_gte=float(low),
-            expired=True,
+            expiration_date=exp.isoformat(),
+            as_of=start_date.isoformat(),
+            strike_price_lte=float(high) + 20.00,
+            strike_price_gte=float(low) - 20.00,
+            expired=False,
             limit=self.OPTION_MAX
-            ):
-            print(bar, "here")
-            print('here')
+            ): # for +/- 20.00 it is an arbitrary number that can be changed
+            #print(bar)
+            
             bars.append(bar)
             if len(bars) == (5*self.OPTION_MAX):
                 print("sleeping for 1 minute")
                 time.sleep(60)
 
-        print(bars)
+        df = pd.DataFrame(bars)
+        print(df.head())
+        print(df.columns.tolist())
 
 
     def retrieveData(self, ticker: str) -> None:
