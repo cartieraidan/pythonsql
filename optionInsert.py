@@ -71,6 +71,9 @@ class optionInsert:
         high = 0
         low = 0
         start_date = ''
+
+        df_start_of = { "Week_of" : [] }
+        #print(f'value of dict: {df_start_of["Week_of"]}')
         for week in lst:
 
             print(f"week {weekNb}: \n\texpired date of week = {week[0]}\n\thigh of week = {week[1]}\n\tlow of week = {week[2]}")
@@ -80,6 +83,7 @@ class optionInsert:
                     ticker = day[1]
                     start_date = day[0]
                     #print(day[0].isoformat())
+                    df_start_of["Week_of"].append(start_date)
                     break
 
             if weekNb == 7:
@@ -91,25 +95,45 @@ class optionInsert:
                 weekNb += 1
 
         print(ticker, exp.isoformat(), start_date.isoformat(), float(high), float(low))
+        df_start_of = pd.DataFrame(df_start_of)
+        print(f'dataframe:\n{df_start_of.head()}')
         bars = [] # add to self.whatever after only for testing
+        
+        delta = abs(high - low)
         
         for bar in self.client.list_options_contracts(
             underlying_ticker=ticker,
             contract_type=None,
             expiration_date=exp.isoformat(),
             as_of=start_date.isoformat(),
-            strike_price_lte=float(high) + 20.00,
-            strike_price_gte=float(low) - 20.00,
+            strike_price_lte=float(high) + float(delta),
+            strike_price_gte=float(low) - float(delta),
             expired=False,
             limit=self.OPTION_MAX
-            ): # for +/- 20.00 it is an arbitrary number that can be changed
+            ): 
             #print(bar)
+            
             
             bars.append(bar)
             if len(bars) == (5*self.OPTION_MAX):
                 print("sleeping for 1 minute")
                 time.sleep(60)
-
+        ''''
+        For here this is where I need to start, 
+        1. Need to put the API call in the week for loop.
+        2. Need to create a second dataframe that mimics the length of the growing bars list for adding week_of column = start_date. To merge onto big dataframe
+            For one week it grabs 22 option list then in the df_start_of needs to append the start date of the week
+            22 times so when it gets added they are all the same.
+            Also need to keep track of the length of the reference list so will need a var to do the difference
+        3. Do testing with the first 7 weeks since already know format and also print out number of option list it grabbed for
+        that week for verification.
+        4. Need to count the number of times it executed the API call as well as the time in between so don't go over limit
+            Say go through 5 weeks in less than a minute we need to track that.
+            So start time from the first api execution to the next then add it into a sum to be checked if it is under 1 minute for a total of 5 api calls.
+            Limited to 5 api a minute so can only do 5 api calls every 60 seconds, so have to track timeelasped and number of api calls, so if 60 seconds has not passed and it already did 5 api calls program needs to wait until 60 seconds is up which can just to a difference then a time.sleep and then can add that in a sum var which can then multiply the time to be tracked for calls requiring more than 10 api calls (i.e. if "time_passed < time_limit * sum_api_call" where sum_api_call is incremented by 1 every 5 api calls)
+        5. After all steps 1-4 are done send everything to another function since this one is getting crazy; to be sent to the SQL database and stored so we can move on to Section 5
+        
+        '''
         df = pd.DataFrame(bars)
         print(df.head())
         print(df.columns.tolist())
