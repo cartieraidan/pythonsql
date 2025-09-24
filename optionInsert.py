@@ -86,14 +86,51 @@ class optionInsert:
                     df_start_of["Week_of"].append(start_date)
                     break
 
-            if weekNb == 7:
-                exp = week[0]
-                high = week[1]
-                low = week[2]
-                break
-            else:
-                weekNb += 1
+                #Aidan explain your code!!!! [[exp,high,low,monday..], []] -> Monday = [day, ticker, ....]
+                #explained
+            #initialize rest of variables for API call
+            exp = week[0]
+            high = week[1]
+            low = week[2]
 
+            #print(ticker, exp.isoformat(), start_date.isoformat(), float(high), float(low))
+            #df_start_of = pd.DataFrame(df_start_of)
+            #print(f'dataframe:\n{df_start_of.head()}')
+            bars = [] # add to self.whatever after only for testing
+
+            delta = abs(high - low)
+
+            for bar in self.client.list_options_contracts(
+                    underlying_ticker=ticker,
+                    contract_type=None,
+                    expiration_date=exp.isoformat(),
+                    as_of=start_date.isoformat(),
+                    strike_price_lte=float(high) + float(delta),
+                    strike_price_gte=float(low) - float(delta),
+                    expired=False,
+                    limit=self.OPTION_MAX
+                ): 
+
+
+                bars.append(bar)
+                if len(bars) == (5*self.OPTION_MAX):
+                    print("sleeping for 1 minute")
+                    time.sleep(60)
+
+            #this is not really needed
+                ''''
+                if weekNb == 7: #think we put the api call here, will create seperate function
+                    #since this is the end of week we get all of our conditions
+                    #somewhat here but just out of the for day so every week we call the function
+                    exp = week[0]
+                    high = week[1]
+                    low = week[2]
+                    break
+                else:
+                    weekNb += 1
+                '''
+        #this code was added into week for loop
+        ''''
         print(ticker, exp.isoformat(), start_date.isoformat(), float(high), float(low))
         df_start_of = pd.DataFrame(df_start_of)
         print(f'dataframe:\n{df_start_of.head()}')
@@ -118,6 +155,7 @@ class optionInsert:
             if len(bars) == (5*self.OPTION_MAX):
                 print("sleeping for 1 minute")
                 time.sleep(60)
+                '''
         ''''
         For here this is where I need to start, 
         1. Need to put the API call in the week for loop.
@@ -134,6 +172,14 @@ class optionInsert:
         5. After all steps 1-4 are done send everything to another function since this one is getting crazy; to be sent to the SQL database and stored so we can move on to Section 5
         
         '''
+
+        #Here feel like I already implemented a df that mimics the start_date column since in the for loop for
+        #week[3:] it adds the start date for every week, so every iteration it should already count it
+        #will need to do further testing
+        print(ticker, exp.isoformat(), start_date.isoformat(), float(high), float(low))
+        df_start_of = pd.DataFrame(df_start_of)
+        print(f'dataframe:\n{df_start_of.head()}')
+
         df = pd.DataFrame(bars)
         print(df.head())
         print(df.columns.tolist())
