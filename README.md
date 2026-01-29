@@ -19,6 +19,7 @@ This document describes the hardware, software, and network configuration used f
   - [Local Reverse SSH Setup](#local-reverse-ssh-setup)
   - [Ensure MySQL Is Running](#ensure-mysql-is-running)
   - [Adding SSH Keys](#adding-ssh-keys)
+  - [DataGrip Configuration](#datagrip-configuration)
   - [Verifying Sudo Privileges](#verifying-sudo-privileges)
   - [Connecting to Cisco Console](#connecting-to-cisco-console)
   - [Setting Up VLANs](#setting-up-vlans)
@@ -80,6 +81,7 @@ Example:
 - MySQL Server X.X
 - Ubuntu Server X.X
 - API Framework
+- DataGrip
 
 ---
 
@@ -91,9 +93,39 @@ Detailed setup and maintenance guides for the system.
 
 Instructions for configuring network interfaces using Netplan.
 
-### Local Reverse SSH Setup
+---
 
-Steps to configure a local reverse SSH tunnel for remote access.
+### Local SSH Setup
+
+Steps to configure a local SSH tunnel for remote access.
+
+1. **Check mySQL is running using** `systemctl`
+2. **Find IP address of server:**
+    
+    - In server console
+    
+        `$ ip -a`
+
+    - If Wifi is **ON** set it to **DOWN**
+
+        `$ sudo ip link dev wlan0 down`
+    
+3. **Connect Mac via ethernet to USB and ping server to test coneection**
+
+    `$ ping 10.60.6.11`
+
+4. **Once you can ping the server, create the ssh tunnel:**
+
+    - Keep terminal open to keep connection
+
+        `$ ssh -N -L 3307:localhost:3306 ubuntu@10.60.6.11`
+
+        - `3307:locahost:3306` Creates a localhost on Mac forwarding part 3306 of the server to port 3307
+        - `ubuntu@10.60.6.11` Is the user on the server and previous IP address found for the server
+        - `-N` Flag for no remote code to executes
+        - `-L` Flag for local part forwarding `[local_port]:[remote_host]:[remote_port] user@ssh_server`
+
+5. **Open DataGrip and connect to database via localhost**
 
 ---
 
@@ -126,6 +158,8 @@ How to confirm that a user has appropriate sudo permissions.
 &nbsp;&nbsp;&nbsp;&nbsp;`$ sudo -I`
 
 ---
+
+### DataGrip configuration
 
 ### Connecting to Cisco Console
 
