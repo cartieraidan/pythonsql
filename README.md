@@ -16,3 +16,17 @@ The deployment server will host the live application that maintains the database
 ### User/Dev
 User/Dev is for building actual application and testing it as a user
 * 2020 MacBook Pro
+
+## Software
+
+## Documentation
+description
+### Netplan
+### Setting up local reverse ssh
+### Ensure mySQL running
+### Adding keys
+### Verifying sudo privileges
+### Connecting to Cisco console
+### Setting up vlans
+### Setting up dhcp
+### Forgot password to switch
