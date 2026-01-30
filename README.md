@@ -22,6 +22,7 @@ This document describes the hardware, software, and network configuration used f
   - [Verifying Sudo Privileges](#verifying-sudo-privileges)
   - [Connecting to Cisco Console](#connecting-to-cisco-console)
   - [Setting Up VLANs](#setting-up-vlans)
+  - [Saving Switch Configurations](#saving-configurations-on-switch)
   - [Setting Up DHCP](#setting-up-dhcp)
   - [Recovering a Forgotten Switch Password](#recovering-a-forgotten-switch-password)
 
@@ -226,7 +227,7 @@ Instructions for connecting to the Cisco switch via console cable.
 
 Guide for creating and configuring VLANs on the switch once have access to console.
 
-**Show all vlans:**
+**Show all vlans**
 
     show vlan
 
@@ -288,18 +289,78 @@ Guide for creating and configuring VLANs on the switch once have access to conso
 
         ip address 10.60.6.1 255.255.255.0
 
+    * Creates usable hosts 10.60.6.1 - 10.60.6.254
+    * The ip for the vlan which is 10.60.6.1 will become a gateway for other devices
+
 3. **Exit to `#` command prompt and verify changes:**
 
         show ip interface brief
 
 ---
 
+### Saving Configurations on Switch
+
+If you do not save your configuration after doing any modifications it will not be saved if the switch gets restarted.
+
+**Save configuration**
+
+1. **Enter into root (command prompt will change to `#`):**
+
+        en
+
+2. **Save configuratoin:**
+
+        copy running-config startup-config
+
+3. **Reload switch (restart):**
+
+        reload
+
+---
+
 ### Setting Up DHCP
 
-Instructions for configuring DHCP services for the network.
+Configurating for DHCP services on the switch
+
+**Help command (in `config#` command prompt)**
+
+    ip dhcp ?
+
+**Configure DHCP for vlan**
+
+1. **Start in `config#` command prompt and select vlan to configure(command prompt will change to `dhcp-config#`):**
+
+        ip dhcp pool <vlan-number>
+
+2. **Configure which subnet it is responsible for:**
+
+        network 10.60.6.0 /24
+
+    * 10.60.6.0 = network address
+    * /24 = subnet mask 255.255.255.0
+    * network range is 10.60.6.0 - 10.60.6.255
+
+3. **Set default router:**
+
+        default-router 10.60.6.1
+
+**Excluding ip addresses for static devices**
+
+1. **Exclude a range of ip addresses(in `config#` command prompt):**
+
+        ip dhcp excluded-address <low-ip> <high-ip>
+
+    * low-ip can be 10.60.6.5
+    * high-ip can be 10.60.6.10
+
+2. **Verify ip addresses have been excluded(in `#` command prompt):**
+
+        show running-config | include ip dhcp excluded-address
+
+---
 
 ### Recovering a Forgotten Switch Password
 
 Procedure for resetting or recovering access to the Cisco switch.
 
----
+
