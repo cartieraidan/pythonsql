@@ -24,6 +24,7 @@ This document describes the hardware, software, and network configuration used f
   - [Setting Up VLANs](#setting-up-vlans)
   - [Saving Switch Configurations](#saving-configurations-on-switch)
   - [Setting Up DHCP](#setting-up-dhcp)
+  - [Other Switch Configurations](#other-switch-configirations)
   - [Recovering a Forgotten Switch Password](#recovering-a-forgotten-switch-password)
 
 ---
@@ -374,8 +375,83 @@ Configurating for DHCP services on the switch
 
 ---
 
+### Other Switch Configirations
+
+**Change hostname**
+
+1. **Enter into `config#` command prompt**
+
+2. **Change hostname:**
+
+        hostname <name>
+
+**Enable password**
+
+1. **Enter into `config#` command prompt**
+
+2. **Enable password:**
+
+        enable password <password>
+
+**Setting a banner**
+
+1. **Enter into `config#` command prompt**
+
+2. **Set banner:**
+
+        banner <type> <delimiter>
+
+    * type:
+        
+        * motd - message of the day (shows on connection)
+        * login - login banner (shows at login prompt)
+        * exec - exec banner (shows after login)
+        * incoming - incoming banner (shows on reverse connections)
+
+    * delimiter = any character used for ending banner input text
+
+---
+
 ### Recovering a Forgotten Switch Password
 
 Procedure for resetting or recovering access to the Cisco switch.
+
+Source link: https://www.youtube.com/watch?v=00xzIVGEtWY
+
+1. **Have the terminal open for the switch console and unplug the power cable on the switch and plug it back in while holding the mode button when it is rebooting until you see a page boot up saying it is in password recovery mode**
+
+2. **Type command `flash_init`**
+
+3. **Type command `load_helper`**
+
+4. **Type `dir flash:` to locate config file**
+
+5. **Rename startuo config to login without a password:**
+
+        rename flash:config.text flash:config.text.old
+
+6. **Type command `boot`**
+
+7. **When done loading enter into switch and say no to all inital configuration setup**
+
+8. **Enter into root by typing `en`**
+
+9. **Rename startup config back to original:**
+
+        rename flash:config.text.old flash:config.text
+
+10. **Copy startup config to running config:**
+
+        copy flash:config.text system:running-config
+
+11. **Optional step to set a password to switch (see Other Switch Configurations section)**
+
+12. **If set a password ensure to save changes:**
+
+        wr
+
+    * writes to memory
+
+13. **Test to ensure all steps done correctly completely `exit` until you get to return screen and try logging in**
 
 
