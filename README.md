@@ -186,6 +186,26 @@ How to confirm that a user has appropriate sudo permissions.
 
 ### DataGrip configuration
 
+1. **Open DataGrip and click data source and choose mySQL**
+
+2. **Right click on db and click properties**
+
+3. **Ensure proper configuration below:**
+
+  Name: 'db_name'@127.0.0.1
+
+  Host: 127.0.0.1
+
+  Port: 3307
+
+  User: "user created on mySQL"
+
+  Password: "password created for mySQL user"
+
+  Database: "db_name"
+
+---
+
 ### Connecting to Cisco Console
 
 Instructions for connecting to the Cisco switch via console cable.
