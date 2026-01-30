@@ -192,17 +192,17 @@ How to confirm that a user has appropriate sudo permissions.
 
 3. **Ensure proper configuration below:**
 
-  Name: 'db_name'@127.0.0.1
+        Name: 'db_name'@127.0.0.1
 
-  Host: 127.0.0.1
+        Host: 127.0.0.1
 
-  Port: 3307
+        Port: 3307
 
-  User: "user created on mySQL"
+        User: "user created on mySQL"
 
-  Password: "password created for mySQL user"
-
-  Database: "db_name"
+        Password: "password created for mySQL user"
+        
+        Database: "db_name"
 
 ---
 
