@@ -111,9 +111,46 @@ Netplan config file for the server to connect to switch via ethernet.
 
 **Wifi Netplan**
 
+    network:
+    ␣␣version: 2
+    ␣␣renderer: networkd
+    ␣␣wifis:
+    ␣␣␣␣wlan0:
+    ␣␣␣␣␣␣dhcp4: true
+    ␣␣␣␣␣␣optional: true
+    ␣␣␣␣␣␣access-points:
+    ␣␣␣␣␣␣␣␣"router-name":
+    ␣␣␣␣␣␣␣␣␣␣password: "password"
+
+* "␣" is meant to indicate the number of whitespaces required since .yaml has indentation sensitivity. 
+
 **Ethernet Netplan**
 
+    network:
+    ␣␣version: 2
+    ␣␣renderer: networkd
+    ␣␣ethernets:
+    ␣␣␣␣eth0:
+    ␣␣␣␣␣␣dhcp4: true
+    ␣␣␣␣␣␣optional: true
+
+* "␣" is meant to indicate the number of whitespaces required since .yaml has indentation sensitivity. 
+
 **Ethernet Netplan with Static `IP`**
+
+**Disabling Wifi**
+
+1. **Disable wifi:**
+
+        sudo rfkill block wifi
+
+2. **Verify it has been disable, should say `Soft blocked: yes`:**
+
+        rfkill list
+
+**Enable wifi**
+
+    sudo rfkill unblock wifi
 
 ---
 
@@ -459,4 +496,5 @@ Source link: https://www.youtube.com/watch?v=00xzIVGEtWY
     * writes to memory
 
 13. **Test to ensure all steps done correctly completely `exit` until you get to return screen and try logging in**
+
 
