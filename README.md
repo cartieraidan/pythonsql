@@ -252,27 +252,45 @@ Guide for creating and configuring VLANs on the switch once have access to conso
 
 **Assigning port to vlan**
 
-1. **Enter into root (command prompt will change to `#`):**
-
-        en
-
-2. **Go into config mode(command prompt will change to `config#`):**
+1. **Go into config mode(command prompt will change to `config#`):**
 
         conf t
 
-3. **Example assigning port 1(command prompt will change to `config-if#`):**
+2. **Example assigning port 1(command prompt will change to `config-if#`):**
 
         interface fastEthernet 0/1
 
-4. **Go into access mode:**
+3. **Go into access mode:**
 
         switchport mode access
 
-5. **Assign port to vlan:**
+4. **Assign port to vlan:**
 
         switchport access vlan <number>
 
-6. **Exit to `#` command prompt and verify change by using `show vlan`**
+5. **Exit to `#` command prompt and verify change by using `show vlan`**
+
+**Assigning mulitple port ranges**
+
+1. **In `config#`, example assigning port 2 to 12:**
+
+        interface range fastEthernet 0/2-12
+
+2. **Repeat steps from assigning port to vlan starting at step 3 to 5**
+
+**Assigning ip address to vlan**
+
+1. **In `config#`, enter into vlan interface(command prompt will change to `config-if#`):**
+
+        interface vlan <number>
+
+2. **Set ip address:**
+
+        ip address 10.60.6.1 255.255.255.0
+
+3. **Exit to `#` command prompt and verify changes:**
+
+        show ip interface brief
 
 ---
 
