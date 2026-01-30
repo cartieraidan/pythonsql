@@ -107,7 +107,13 @@ Detailed setup and maintenance guides for the system.
 
 ### Netplan Configuration
 
-Instructions for configuring network interfaces using Netplan.
+Netplan config file for the server to connect to switch via ethernet.
+
+**Wifi Netplan**
+
+**Ethernet Netplan**
+
+**Ethernet Netplan with Static `IP`**
 
 ---
 
@@ -453,5 +459,4 @@ Source link: https://www.youtube.com/watch?v=00xzIVGEtWY
     * writes to memory
 
 13. **Test to ensure all steps done correctly completely `exit` until you get to return screen and try logging in**
-
 
