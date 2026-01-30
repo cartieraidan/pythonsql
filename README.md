@@ -120,7 +120,7 @@ Steps to configure a local SSH tunnel for remote access.
     
     - In server console
     
-        `$ ip -a`
+        `$ ip a`
 
     - If Wifi is **ON** set it to **DOWN**
 
