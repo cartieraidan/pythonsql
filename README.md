@@ -19,7 +19,6 @@ This document describes the hardware, software, and network configuration used f
   - [Local Reverse SSH Setup](#local-reverse-ssh-setup)
   - [Ensure MySQL Is Running](#ensure-mysql-is-running)
   - [Adding SSH Keys](#adding-ssh-keys)
-  - [DataGrip Configuration](#datagrip-configuration)
   - [Verifying Sudo Privileges](#verifying-sudo-privileges)
   - [Connecting to Cisco Console](#connecting-to-cisco-console)
   - [Setting Up VLANs](#setting-up-vlans)
@@ -149,7 +148,33 @@ How to verify that the MySQL service is active and accepting connections.
 
 ### Adding SSH Keys
 
-How to generate and add SSH keys for secure authentication.
+Generating ssh key and storing public key on server using a usb.
+
+1. **If you don't already have a ssh key, generate one:**
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$ ssh-keygen -t ed25519 -C "email@email.com"`
+
+2. **Copy public key to USB:**
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$ cp ~/.ssh/id_ed25519.pub /Volumes/"UsbName"`
+
+3. **Transfer USB to server and locate in dir:**
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$ lsblk`
+
+4. **Mount USB:**
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$ sudo mount /dev/sdX1 /mnt/usb`
+
+5. **Copy ssh key to authorized keys:**
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$ cat /mnt/usb/id_ed25519.pub >> /user/.ssh/authorized_keys`
+
+6. **Unmount USB from server:**
+
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`$ sudo umount /mnt/usb`
+
+---
 
 ### Verifying Sudo Privileges
 
