@@ -138,6 +138,16 @@ Netplan config file for the server to connect to switch via ethernet.
 
 **Ethernet Netplan with Static `IP`**
 
+**Apply Netplan**
+
+1. **Compile config to check for any syntax errors:**
+
+        sudo netplan generate
+
+2. **Apply netplan if no errors or warnings:**
+
+        sudo netplan apply
+
 **Disabling Wifi**
 
 1. **Disable wifi:**
