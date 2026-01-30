@@ -224,7 +224,57 @@ Instructions for connecting to the Cisco switch via console cable.
 
 ### Setting Up VLANs
 
-Guide for creating and configuring VLANs on the switch.
+Guide for creating and configuring VLANs on the switch once have access to console.
+
+**Show all vlans:**
+
+    show vlan
+
+**Create a new vlan**
+
+1. **Enter into root (command prompt will change to `#`):**
+
+        en
+
+2. **Go into config mode(command prompt will change to `config#`):**
+
+        conf t
+
+3. **Create vlan(command prompt will change to `vlan-config#`):**
+
+        vlan <number>
+
+4. **Name vlan:**
+
+        name "name-of-vlan"
+
+5. **Use exit to get out of command prompt and back to `#`**
+
+**Assigning port to vlan**
+
+1. **Enter into root (command prompt will change to `#`):**
+
+        en
+
+2. **Go into config mode(command prompt will change to `config#`):**
+
+        conf t
+
+3. **Example assigning port 1(command prompt will change to `config-if#`):**
+
+        interface fastEthernet 0/1
+
+4. **Go into access mode:**
+
+        switchport mode access
+
+5. **Assign port to vlan:**
+
+        switchport access vlan <number>
+
+6. **Exit to `#` command prompt and verify change by using `show vlan`**
+
+---
 
 ### Setting Up DHCP
 
