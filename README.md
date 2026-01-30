@@ -201,7 +201,7 @@ How to confirm that a user has appropriate sudo permissions.
         User: "user created on mySQL"
 
         Password: "password created for mySQL user"
-        
+
         Database: "db_name"
 
 ---
@@ -209,6 +209,18 @@ How to confirm that a user has appropriate sudo permissions.
 ### Connecting to Cisco Console
 
 Instructions for connecting to the Cisco switch via console cable.
+
+1. **Plug in console cable to the back of the switch**
+
+2. **Find USB that plugged in (may need to do this step while unplugged and plugged to identify):**
+
+        ls /dev/tty.usb*
+
+3. **Remote into switch using screen:**
+
+        screen /dev/tty.usbxxxxxxx 
+
+---
 
 ### Setting Up VLANs
 
