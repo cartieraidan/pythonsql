@@ -27,11 +27,13 @@ This document describes the hardware, software, and network configuration used f
   - [Recovering a Forgotten Switch Password](#recovering-a-forgotten-switch-password)
 
 ---
+---
 
 ## Background
 
 This project is motivated by the need to train machine learning algorithms on real life datasets of the stock market by using historical data. Having a dedicated database for training or testing machine learning algorithms will improve the efficiency of related projects
 
+---
 ---
 
 ## Overview
@@ -39,10 +41,13 @@ This project is motivated by the need to train machine learning algorithms on re
 This project uses a local MySQL server hosted on an Ubuntu server. The server is connected to a network switch, allowing communication with development and deployment machines over Ethernet and SSH. The deployment server hosts the live API and application, which interacts with the database.
 
 ---
+---
 
 ## Hardware
 
 All hardware used to deploy, host, and test the project.
+
+---
 
 ### Server
 
@@ -52,11 +57,15 @@ The server hosts the MySQL database and handles all queries from the API and app
   - Version: X  
   - OS: Ubuntu Server (Release: X)
 
+---
+
 ### Network Switch
 
 The network switch is used to establish communication between all hardware components.
 
 - **Cisco Catalyst (Model X)**
+
+---
 
 ### Deployment Server (API Host)
 
@@ -65,12 +74,15 @@ The deployment server hosts the live application and API, which manages the data
 - **2017 MacBook Air**
     - OS: Ubuntu Desktop (Release: X) 
 
+---
+
 ### User/Developer Machine
 
 The user/developer machine is used for application development and for testing the system from an end-user perspective.
 
 - **2020 MacBook Pro**
 
+---
 ---
 
 ## Software
@@ -84,10 +96,13 @@ Example:
 - DataGrip
 
 ---
+---
 
 ## Documentation
 
 Detailed setup and maintenance guides for the system.
+
+
 
 ### Netplan Configuration
 
