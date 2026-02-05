@@ -16,7 +16,7 @@ This document describes the hardware, software, and network configuration used f
 - [Software](#software)
 - [Documentation](#documentation)
   - [Netplan Configuration](#netplan-configuration)
-  - [Local Reverse SSH Setup](#local-reverse-ssh-setup)
+  - [Local SSH Setup](#local-ssh-setup)
   - [Ensure MySQL Is Running](#ensure-mysql-is-running)
   - [Adding SSH Keys](#adding-ssh-keys)
   - [Verifying Sudo Privileges](#verifying-sudo-privileges)
