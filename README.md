@@ -14,6 +14,7 @@ This document describes the hardware, software, and network configuration used f
   - [Deployment Server (API Host)](#deployment-server-api-host)
   - [User/Developer Machine](#userdeveloper-machine)
 - [Software](#software)
+- [Server Rack](#server-rack) 
 - [Documentation](#documentation)
   - [Netplan Configuration](#netplan-configuration)
   - [Local SSH Setup](#local-ssh-setup)
@@ -95,6 +96,19 @@ Example:
 - Ubuntu Server X.X
 - API Framework
 - DataGrip
+
+---
+---
+
+## Server Rack
+
+# Hardware To Purchase
+
+* Metal file
+* Angle grinder discs
+* Angle grinder flap disc
+* Black spray paint primer
+* Black spray paint
 
 ---
 ---
