@@ -102,7 +102,7 @@ Example:
 
 ## Server Rack
 
-# Hardware To Purchase
+### Hardware To Purchase
 
 * Metal file
 * Angle grinder discs
