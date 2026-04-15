@@ -72,7 +72,7 @@ The network switch is used to establish communication between all hardware compo
 ### Deployment Server (API Host)
 
 The deployment server hosts the live application and API, which manages the database and handles all incoming API requests.
-Could also act as a proxy to control the resources of the db and even cache frequent queries
+Could also act as a proxy to control the resources of the db and even cache frequent queries and to control access and authentication.
 
 - **2017 MacBook Air**
     - OS: Ubuntu Desktop (Release: X) 
