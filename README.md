@@ -16,6 +16,7 @@ This document describes the hardware, software, and network configuration used f
 - [Software](#software)
 - [Server Rack](#server-rack) 
 - [Documentation](#documentation)
+  - [Setup venv](#setup-venv)   
   - [Netplan Configuration](#netplan-configuration)
   - [Local SSH Setup](#local-ssh-setup)
   - [Ensure MySQL Is Running](#ensure-mysql-is-running)
@@ -119,6 +120,19 @@ Example:
 Detailed setup and maintenance guides for the system.
 
 
+### Setup venv
+
+1. **Install python venv**
+
+        $ sudo apt-get install python3-venv
+
+2. **Create virtual env**
+
+        $ python3 -m venv venv
+
+3. **Activate env**
+
+        $ source /venv/bin/activate
 
 ### Netplan Configuration
 
