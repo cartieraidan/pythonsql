@@ -27,6 +27,7 @@ This document describes the hardware, software, and network configuration used f
   - [Saving Switch Configurations](#saving-configurations-on-switch)
   - [Setting Up DHCP](#setting-up-dhcp)
   - [Other Switch Configurations](#other-switch-configirations)
+  - [Setting Secure Password](#emoving-type-0-password-and-enabling-type-9-password)
   - [Recovering a Forgotten Switch Password](#recovering-a-forgotten-switch-password)
 
 ---
@@ -491,7 +492,26 @@ Configurating for DHCP services on the switch
         * incoming - incoming banner (shows on reverse connections)
 
     * delimiter = any character used for ending banner input text
+---
 
+### Removing Type 0 Password and Enabling Type 9 Password
+
+1. **Start in `config#` and remove all password set:**
+
+        no enable password
+
+2. **Set password to type 9:**
+
+        enable algorithm-type scrypt secret <password> 
+
+3. **Exit out of `config#` then verify it is saved not in plain text:**
+
+        show running-config | include enable
+
+4. **Save changes:**
+
+        wr
+   
 ---
 
 ### Recovering a Forgotten Switch Password
