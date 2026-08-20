@@ -24,6 +24,7 @@ This document describes the hardware, software, and network configuration used f
   - [Verifying Sudo Privileges](#verifying-sudo-privileges)
   - [Connecting to Cisco Console](#connecting-to-cisco-console)
   - [Setting Up VLANs](#setting-up-vlans)
+  - [Adding Description to a Port](#adding-description-to-a-port)
   - [Saving Switch Configurations](#saving-configurations-on-switch)
   - [Setting Up DHCP](#setting-up-dhcp)
   - [Other Switch Configurations](#other-switch-configirations)
@@ -394,6 +395,21 @@ Guide for creating and configuring VLANs on the switch once have access to conso
 3. **Exit to `#` command prompt and verify changes:**
 
         show ip interface brief
+---
+
+### Adding Description to a Port
+
+1. **In `config#`, enter into port interface(command prompt will change to `config-if#`):**
+
+        interface <port>
+
+2. **Add description:**
+
+        description <desc>
+
+3. **Exit config mode then save config:**
+
+        wr
 
 ---
 
